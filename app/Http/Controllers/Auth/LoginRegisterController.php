@@ -49,8 +49,8 @@ public function store (Request $request)
     $data = [
         'name' => $request->name,
         'email' => $request->email,
-        'subject' => "Selamat Datang di Web Portfolio",
-        'body' => "Anda telah mengunjungi situs Web Portfolio."
+        'subject' => "Selamat Datang di Website Portfolioku",
+        'body' => "Anda telah mengunjungi Website Portfolio Ananda Kusuma Putri."
     ];
 
 $credentials = $request->only ('email', 'password');

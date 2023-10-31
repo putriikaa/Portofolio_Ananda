@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendMailJob;
+
 
 class LoginRegisterController extends Controller
 {
@@ -44,9 +46,19 @@ public function store (Request $request)
     'password' => Hash::make($request->password)
     ]);
 
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'subject' => "Selamat Datang di Web Portfolio",
+        'body' => "Anda telah mengunjungi situs Web Portfolio."
+    ];
+
 $credentials = $request->only ('email', 'password');
 Auth::attempt($credentials);
 $request->session ()->regenerate(); 
+
+dispatch(new SendMailJob($data));
+
 return redirect()->route('dashboard')
     ->withSuccess('You have successfully registered & logged in!');
 }

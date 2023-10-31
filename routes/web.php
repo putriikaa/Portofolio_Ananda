@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\PortoController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------

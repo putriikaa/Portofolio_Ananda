@@ -8,7 +8,7 @@
       <th scope="col">Email</th>
       <th scope="col">Photo</th>
       <th scope="col">Action</th>
-      <th scope="col">Resize</th> <!-- Tambahkan kolom Resize -->
+      <th scope="col">Resize</th> 
     </tr>
   </thead>
   <tbody>

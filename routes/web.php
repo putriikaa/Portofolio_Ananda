@@ -30,7 +30,7 @@ Route::controller(LoginRegisterController::class)->group(function() {
   
 });
 
-// Di routes/web.php
+
 Route::controller(ResizeController::class)->group(function() {
     Route::get('/users', 'index')->name('users');
     Route::get('edit/{id}', 'edit')->name('edit');

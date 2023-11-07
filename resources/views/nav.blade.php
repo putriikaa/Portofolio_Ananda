@@ -52,6 +52,7 @@
               <li class="scroll-to-section"><a href="#portfolio">Portfolio</a></li>
               <li class="scroll-to-section"><a href="#contact">Contact Me</a></li> 
               <li class="scroll-to-section"><div class="main-red-button-hover"><form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Logout</button></form></div></li> 
+              <li class="scroll-to-section"><div class="main-red-button-hover"><form action="{{ route('users') }}" method="GET">@csrf<button type="submit">Go To Users</button></form></div></li>
             </ul>        
             <a class='menu-trigger'>
                 <span>Menu</span>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Post\ResizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SendEmailController;
 
@@ -26,9 +27,16 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
-    
+  
 });
 
-
-
+// Di routes/web.php
+Route::controller(ResizeController::class)->group(function() {
+    Route::get('/users', 'index')->name('users');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::post('update/{id}', 'update')->name('update');
+    Route::delete('delete/{id}', 'destroy')->name('destroy'); 
+    Route::get('/users/{user}/resize', 'resizeForm')->name('resizeForm');
+    Route::post('/users/{users}/resize', 'resizeImage')->name('resizeImage');
+});
 

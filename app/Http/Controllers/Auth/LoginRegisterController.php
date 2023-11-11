@@ -92,4 +92,5 @@ public function authenticate(Request $request)
         return redirect()->route('login')
         ->withSuccess('You have logged out successfully!');;
     }
+    
 }

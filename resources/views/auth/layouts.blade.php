@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
                 </li>
                 <!-- Tambahkan kode ini di antara elemen-elemen navbar yang ada -->
                 <li class="nav-item">
-                    <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{ route('gallery.index') }}">Gallery</a>
+                    <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{ route('gallery.index') }}" onclick="return showLoginAlert()">Gallery</a>
                 </li>
                 <!-- Akhir kode tambahan -->
                 @else
@@ -55,5 +56,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="{{ asset('lightbox2-dev\dist\js\lightbox-plus-jquery.min.js')}}"></script>
+<script>
+    function showLoginAlert() {
+        alert('Please log in to access the gallery.');
+        return false; // Prevent the link from being followed
+    }
+</script>
 </body>
+
 </html>

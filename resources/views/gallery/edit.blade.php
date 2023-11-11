@@ -4,7 +4,7 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Edit Data Gambar</div>
+            <div class="card-header bg-primary text-white">Edit Data Gambar</div>
             <div class="card-body">
                 <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-success">Update</button>
                         </div>
                     </div>
                 </form>

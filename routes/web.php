@@ -48,6 +48,7 @@ Route::controller(GalleryController::class)->group(function() {
     Route::delete('delete/{id}', 'destroy')->name('destroy');
     Route::get('edit/{id}', 'edit')->name('edit');
     Route::patch('update/{id}', 'update')->name('update');
+    
 });
 
 

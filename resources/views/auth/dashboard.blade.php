@@ -162,20 +162,20 @@
   </div>
 
   <!-- Portofolio -->
-  <div id="portfolio" class="our-portfolio section">
-    <div class="portfolio-left-dec">
-      <img src="images/portfolio-left-dec.png" alt="">
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <div class="section-heading">
-            <h2>My <em>Recent</em> Projects <span> & Case Studies</span></h2>
-            <span>My Portofolio</span>
-          </div>
+<div id="portfolio" class="our-portfolio section">
+  <div class="portfolio-left-dec">
+    <img src="images/portfolio-left-dec.png" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="section-heading">
+          <h2>My <em>Recent</em> Projects <span> & Case Studies</span></h2>
+          <span>My Portfolio</span>
         </div>
       </div>
     </div>
+  </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
@@ -265,6 +265,23 @@
       </div>
     </div>
   </div>
+
+  <!-- Gallery -->
+  <div id="portfolio" class="our-portfolio section">
+  <div class="portfolio-left-dec">
+    <img src="images/portfolio-left-dec.png" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="section-heading">
+          <h2>My<em>Gallery</em> Projects <span> & Portofolio</span></h2>
+          <span style="cursor: pointer;" onclick="window.location.href='{{ route('gallery.index') }}'">See My Gallery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Contact -->
   <div id="contact" class="contact-us section">
     <div class="container">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Gallery;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Models\Post;
 
 class GalleryController extends Controller
@@ -13,6 +14,12 @@ class GalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+     //supaya login dulu baru dapat mengakses gallery portofolio
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
     public function index()
     {
         $data = array(
@@ -41,34 +48,39 @@ class GalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-        'title' => 'required|max:255',
-        'description' => 'required',
-        'picture' => 'image|nullable|max:1999'
-        ]);
-        if ($request->hasFile('picture')) {
-        $filenameWithExt = $request->file('picture')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('picture')->getClientOriginalExtension();
-        $basename = uniqid() . time();
-        $smallFilename = "small_{$basename}.{$extension}";
-        $mediumFilename = "medium_{$basename}.{$extension}";
-        $largeFilename = "large_{$basename}.{$extension}";
-        $filenameSimpan = "{$basename}.{$extension}";
-        $path = $request->file('picture')->storeAs('posts_image', $filenameSimpan);
-        } else {
-        $filenameSimpan = 'noimage.png';
-        }
-        // dd($request->input());
-        $post = new Post;
-        $post->picture = $filenameSimpan;
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-        $post->save();
-        return redirect('gallery')->with('success', 'Berhasil menambahkan data baru');
-    }
+
+     public function store(Request $request)
+     {
+         $this->validate($request, [
+             'title' => 'required|max:255',
+             'description' => 'required',
+             'picture' => 'image|nullable|max:1999'
+         ]);
+     
+         $filenameSimpan = 'noimage.png';
+     
+         if ($request->hasFile('picture')) {
+             $image = $request->file('picture');
+             $basename = uniqid() . time();
+             $filenameSimpan = "{$basename}.{$image->getClientOriginalExtension()}";
+     
+             // Save the original image
+             $path = $request->file('picture')->storeAs('posts_image', $filenameSimpan);
+     
+             // Create and save thumbnail
+             $thumbnailPath = public_path("storage/posts_image/{$filenameSimpan}");
+             $thumbnail = Image::make($image)->fit(400,200);
+             $thumbnail->save($thumbnailPath);
+         }
+     
+         $post = new Post;
+         $post->picture = $filenameSimpan;
+         $post->title = $request->input('title');
+         $post->description = $request->input('description');
+         $post->save();
+     
+         return redirect('gallery')->with('success', 'Berhasil menambahkan data baru');
+     }
 
     /**
      * Display the specified resource.
@@ -102,36 +114,40 @@ class GalleryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'title' => 'required|max:255',
-        'description' => 'required',
-        'picture' => 'image|nullable|max:1999'
-    ]);
-
-    $gallery = Gallery::find($id);
-
-    if (!$gallery) {
-        return redirect()->route('gallery.index')->with('error', 'Gambar tidak ditemukan.');
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'picture' => 'image|nullable|max:1999'
+        ]);
+    
+        $post = Post::find($id);
+    
+        if (!$post) {
+            return redirect()->route('gallery.index')->with('error', 'Post tidak ditemukan.');
+        }
+    
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+    
+        if ($request->hasFile('picture')) {
+            // Upload gambar baru jika ada berkas yang diunggah
+            $image = $request->file('picture');
+            $imageName = time() . '.' . $image->extension();
+            $image->storeAs('posts_image', $imageName);
+    
+            // Create and save thumbnail
+            $thumbnailPath = public_path("storage/posts_image/{$imageName}");
+            $thumbnail = Image::make($image)->fit(400, 200);
+            $thumbnail->save($thumbnailPath);
+    
+            $post->picture = $imageName;
+        }
+    
+        $post->save();
+    
+        return redirect()->route('gallery.index')->with('success', 'Post berhasil diperbarui.');
     }
-
-    $gallery->title = $request->input('title');
-    $gallery->description = $request->input('description');
-
-    if ($request->hasFile('picture')) {
-        // Upload gambar baru jika ada berkas yang diunggah
-        $image = $request->file('picture');
-        $imageName = time() . '.' . $image->extension();
-        $image->storeAs('public/posts_image', $imageName);
-        $gallery->picture = $imageName;
-    }
-
-    $gallery->save();
-
-    return redirect()->route('gallery.index')->with('success', 'Gambar berhasil diperbarui.');
-}
-
-
     /**
      * Remove the specified resource from storage.
      *

@@ -5,9 +5,7 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-6">
         <div class="card">
-        <div class="card-header text-center bg-primary text-white">
-            <h3><b>Login</b></h3>    
-        </div>
+            <div class="card-header text-center bg-secondary text-white"> Isi untuk masuk</div>
             <div class="card-body">
                 <form action="{{ route('authenticate') }}" method="post">
                     @csrf

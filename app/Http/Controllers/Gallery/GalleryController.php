@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Models\Post;
+use Illuminate\Support\Facades\File;
 
 class GalleryController extends Controller
 {
@@ -64,6 +65,12 @@ class GalleryController extends Controller
              $basename = uniqid() . time();
              $filenameSimpan = "{$basename}.{$image->getClientOriginalExtension()}";
      
+
+             $folderRESIZE = public_path('storage/posts_image/resize');
+            if (!File::isDirectory($folderRESIZE)) {
+                File::makeDirectory($folderRESIZE, 0777, true, true);
+            }
+
              // Save the original image
              $path = $request->file('picture')->storeAs('posts_image/asli', $filenameSimpan);
      

@@ -65,10 +65,10 @@ class GalleryController extends Controller
              $filenameSimpan = "{$basename}.{$image->getClientOriginalExtension()}";
      
              // Save the original image
-             $path = $request->file('picture')->storeAs('posts_image', $filenameSimpan);
+             $path = $request->file('picture')->storeAs('posts_image/asli', $filenameSimpan);
      
              // Create and save thumbnail
-             $thumbnailPath = public_path("storage/posts_image/{$filenameSimpan}");
+             $thumbnailPath = public_path("storage/posts_image/resize/{$filenameSimpan}");
              $thumbnail = Image::make($image)->fit(400,200);
              $thumbnail->save($thumbnailPath);
          }

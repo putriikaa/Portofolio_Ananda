@@ -20,7 +20,7 @@
               @if(File::exists(public_path('storage/photos/thumbnail/'. $user->photo )) == false)
                 <p>Not Available</p>
               @else
-                <img src="{{ asset('storage/photos/original/'. $user->photo ) }}" width="150px">
+                <img src="{{ asset('storage/photos/thumbnail/'. $user->photo ) }}" width="150px">
               @endif
             </td>
             <td>

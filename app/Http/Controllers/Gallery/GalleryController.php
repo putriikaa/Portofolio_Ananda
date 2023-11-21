@@ -8,8 +8,10 @@ use Intervention\Image\Facades\Image;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
 
+
 class GalleryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +25,7 @@ class GalleryController extends Controller
      }
     public function index()
     {
+
         $data = array(
             'id' => "posts",
             'menu' => 'Gallery',
@@ -144,7 +147,7 @@ class GalleryController extends Controller
             $image->storeAs('posts_image', $imageName);
     
             // Create and save thumbnail
-            $thumbnailPath = public_path("storage/posts_image/{$imageName}");
+            $thumbnailPath = public_path("storage/posts_image/resize/{$imageName}");
             $thumbnail = Image::make($image)->fit(400, 200);
             $thumbnail->save($thumbnailPath);
     

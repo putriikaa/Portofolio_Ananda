@@ -42,13 +42,12 @@ Route::controller(ResizeController::class)->group(function() {
 });
 
 Route::controller(GalleryController::class)->group(function() {
-    Route::resource('gallery', GalleryController::class);
-    Route::get('/create', 'create')->name('create');
-    Route::get('/store', 'store')->name('store');
-    Route::delete('delete/{id}', 'destroy')->name('destroy');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::patch('update/{id}', 'update')->name('update');
+    // Route::get('/create', 'create')->name('gallery.create');
+    // Route::get('/store', 'store')->name('gallery.store');
+    // Route::delete('delete/{id}', 'destroy')->name('gallery.destroy');
+    // Route::get('edit/{id}', 'edit')->name('gallery.edit');
+    // Route::patch('update/{id}', 'update')->name('gallery.update');
     
 });
-
+Route::resource('gallery', GalleryController::class);
 

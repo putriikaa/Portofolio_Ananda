@@ -8,7 +8,7 @@
             <div class="card-body">
                 <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PATCH') 
+                    @method('PUT') 
                     <div class="mb-3 row">
                         <label for="title" class="col-md-4 col-form-label text-md-end text-start">Title</label>
                         <div class="col-md-6">

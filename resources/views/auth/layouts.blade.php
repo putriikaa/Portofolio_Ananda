@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{ route('gallery.index') }}" onclick="return showLoginAlert()">Gallery</a>
                 </li>
+                <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}" href="{{route('GalleryList') }}">Gallery dari API</a>
+                    </li>
                 <!-- Akhir kode tambahan -->
                 @else
                 <li class="nav-item dropdown">

@@ -34,12 +34,16 @@ class APIGalleryController extends Controller
     public function index(){
         $response = Http::get('http://127.0.0.1:9000/api/apigallery');
         $datas = $response->object()->data;
-        return view('gallery.index', compact('datas'));
+        return view('APIGallery.index', compact('datas'));
+    }
+    public function create()
+    {
+        return view('APIGallery.create');
     }
    /**
 * @OA\Post(
-* path="/api/apigallery",
-* tags={"gallery"},
+* path="/api/storeGallery",
+* tags={"upload gallery"},
 * summary="Create a new gallery",
 * description="Create a new gallery with title, description, and optional image upload.",
 * operationId="createGallery",
@@ -53,13 +57,11 @@ class APIGalleryController extends Controller
 *                property="title",
 *                type="string",
 *                description="Gallery title",
-*                example="My Gallery"
 *            ),
 *            @OA\Property(
 *                property="description",
 *                type="string",
 *                description="Gallery description",
-*                example="A beautiful gallery"
 *            ),
 *            @OA\Property(
 *                property="picture",
@@ -71,14 +73,14 @@ class APIGalleryController extends Controller
 *    ),
 * ),
 * @OA\Response(
-*    response="201",
+*    response="200",
 *    description="Gallery created successfully",
 * ),
 * )
 */
 
 
-public function store(Request $request)
+public function storeGallery(Request $request)
 {
     $this->validate($request, [
         'title' => 'required|max:255',
@@ -94,16 +96,16 @@ public function store(Request $request)
         $filenameSimpan = "{$basename}.{$image->getClientOriginalExtension()}";
 
 
-        $folderRESIZE = public_path('storage/posts_image/resize');
+        $folderRESIZE = public_path('storage/posts_image/');
        if (!File::isDirectory($folderRESIZE)) {
            File::makeDirectory($folderRESIZE, 0777, true, true);
        }
 
         // Save the original image
-        $path = $request->file('picture')->storeAs('posts_image/asli', $filenameSimpan);
+        $path = $request->file('picture')->storeAs('posts_image/', $filenameSimpan);
 
         // Create and save thumbnail
-        $thumbnailPath = public_path("storage/posts_image/resize/{$filenameSimpan}");
+        $thumbnailPath = public_path("storage/posts_image/{$filenameSimpan}");
         $thumbnail = Image::make($image)->fit(400,200);
         $thumbnail->save($thumbnailPath);
     }
@@ -114,7 +116,29 @@ public function store(Request $request)
     $post->description = $request->input('description');
     $post->save();
 
-    return redirect('gallery')->with('success', 'Berhasil menambahkan data baru');
+    return redirect()->route('resultGallery')->with('success', 'Berhasil menambahkan data baru');
 }
 
+// /**
+//  * @OA\Post(
+//  *     path="/api/deleteGallery/{id}",
+//  *     tags={"Hapus Gambar Upload"},
+//  *     summary="Hapus Upload",
+//  *     description="Hapus gambar yang telah diupload",
+//  *     operationId="hapusUpload",
+//  *     @OA\Parameter(
+//  *         name="id",
+//  *         description="id upload",
+//  *         required=true,
+//  *         in="path",
+//  *         @OA\Schema(
+//  *             type="string"
+//  *         )
+//  *     ),
+//  *     @OA\Response(
+//  *         response="default",
+//  *         description="successful operation"
+//  *     )
+//  * )
+//  */
 } 

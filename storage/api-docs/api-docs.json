@@ -27,10 +27,12 @@
                         "description": "successful operation"
                     }
                 }
-            },
+            }
+        },
+        "/api/storeGallery": {
             "post": {
                 "tags": [
-                    "gallery"
+                    "upload gallery"
                 ],
                 "summary": "Create a new gallery",
                 "description": "Create a new gallery with title, description, and optional image upload.",
@@ -44,13 +46,11 @@
                                 "properties": {
                                     "title": {
                                         "description": "Gallery title",
-                                        "type": "string",
-                                        "example": "My Gallery"
+                                        "type": "string"
                                     },
                                     "description": {
                                         "description": "Gallery description",
-                                        "type": "string",
-                                        "example": "A beautiful gallery"
+                                        "type": "string"
                                     },
                                     "picture": {
                                         "description": "Image file",
@@ -64,7 +64,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Gallery created successfully"
                     }
                 }

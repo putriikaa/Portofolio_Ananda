@@ -24,6 +24,8 @@ Route::get('/info', [InfoController::class, 'index'])->name('info');
 
 Route::get('/greet', [GreetController::class,'greet'])->name('greet');
 
-Route::get('/apigallery', [APIGalleryController::class, 'getGallery'])->name('api.gallery');
-
-Route::post('/apigallery',[APIGalleryController::class,'store'])->name('api.gallery');
+Route::get('/apigallery', [APIGalleryController::class, 'getGallery'])->name('resultGallery');
+Route::post('/apigallery', [APIGalleryController::class, 'storeGallery'])->name('resultGallery');
+Route::get('/gallery', [APIGalleryController::class, 'index'])->name('GalleryList');
+Route::get('/creategallery', [APIGalleryController::class, 'create'])->name('PostGallery');
+Route::post('/storeGallery', [APIGalleryController::class, 'storeGallery'])->name('SimpanGallery');

@@ -96,7 +96,7 @@ public function storeGallery(Request $request)
         $filenameSimpan = "{$basename}.{$image->getClientOriginalExtension()}";
 
 
-        $folderRESIZE = public_path('storage/posts_image/');
+        $folderRESIZE = public_path('public/storage/posts_image/');
        if (!File::isDirectory($folderRESIZE)) {
            File::makeDirectory($folderRESIZE, 0777, true, true);
        }
@@ -105,7 +105,7 @@ public function storeGallery(Request $request)
         $path = $request->file('picture')->storeAs('posts_image/', $filenameSimpan);
 
         // Create and save thumbnail
-        $thumbnailPath = public_path("storage/posts_image/{$filenameSimpan}");
+        $thumbnailPath = public_path("public/storage/posts_image/{$filenameSimpan}");
         $thumbnail = Image::make($image)->fit(400,200);
         $thumbnail->save($thumbnailPath);
     }

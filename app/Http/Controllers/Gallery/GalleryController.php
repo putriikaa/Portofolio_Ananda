@@ -147,7 +147,7 @@ class GalleryController extends Controller
             $image->storeAs('posts_image', $imageName);
     
             // Create and save thumbnail
-            $thumbnailPath = public_path("storage/posts_image/resize/{$imageName}");
+            $thumbnailPath = public_path("public/storage/posts_image/resize/{$imageName}");
             $thumbnail = Image::make($image)->fit(400, 200);
             $thumbnail->save($thumbnailPath);
     

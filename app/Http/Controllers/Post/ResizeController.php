@@ -30,17 +30,17 @@ class ResizeController extends Controller
     
         $photo = $users->photo;
     
-        $originalPath = public_path('storage/photos/original/' . $photo);
+        $originalPath = public_path('public/storage/photos/original/' . $photo);
         if (File::exists($originalPath)) {
             File::delete($originalPath);
         }
     
-        $thumbnailPath = public_path('storage/photos/thumbnail/' . $photo);
+        $thumbnailPath = public_path('public/storage/photos/thumbnail/' . $photo);
         if (File::exists($thumbnailPath)) {
             File::delete($thumbnailPath);
         }
     
-         $squarePath = public_path('storage/photos/square/' . $photo);
+         $squarePath = public_path('public/storage/photos/square/' . $photo);
          if (File::exists($squarePath)) {
              File::delete($squarePath);
          }

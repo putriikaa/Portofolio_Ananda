@@ -20,7 +20,7 @@
                         @foreach ($galleries as $gallery)
                             <div class="col-sm-4 mb-4">
                                 <div class="card">
-                                    <a class="example-image-link" href="{{asset('storage/posts_image/asli/'.$gallery->picture)}}" data-lightbox="roadtrip" data-title="{{$gallery->description}}">
+                                    <a class="example-image-link" href="{{asset('public/storage/posts_image/asli/'.$gallery->picture)}}" data-lightbox="roadtrip" data-title="{{$gallery->description}}">
                                         <img class="card-img-top example-image img-fluid" src="{{asset('storage/posts_image/resize/'.$gallery->picture)}}" alt="image-1" />
                                     </a>
                                     <div class="card-body">
